@@ -1,0 +1,13 @@
+a.out
+ft_split.c
+ft_split.o
+ft_strjoin.c
+ft_strjoin.o
+idk.c
+infile
+Makefile
+outfile
+pipex
+pipex.c
+pipex.h
+pipex.o
