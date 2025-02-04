@@ -1,22 +1,41 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/27 01:39:09 by aammisse          #+#    #+#              #
+#    Updated: 2025/02/03 16:16:22 by aammisse         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = pipex
-SRCS = ft_split.c ft_strjoin.c pipex.c
+BNAME = pipex_bonus
+SRCS = Mandatory/ft_split.c Mandatory/ft_strjoin.c Mandatory/pipex.c Mandatory/functions.c
+BSRCS = Bonus/ft_split_bonus.c Bonus/pipex_bonus.c Bonus/GNL/get_next_line_bonus.c Bonus/GNL/get_next_line_utils_bonus.c \
+		Bonus/heredoc_bonus.c
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c pipex.h
+bonus: $(BOBJS) Bonus/pipex_bonus.h
+	$(CC) $(CFLAGS) $(BOBJS) -o $(BNAME)
+
+%.o: %.c Mandatory/pipex.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS) $(BOBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BNAME)
 
 re: fclean all

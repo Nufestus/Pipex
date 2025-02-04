@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:26:45 by aammisse          #+#    #+#             */
-/*   Updated: 2025/01/25 16:45:13 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/01/27 01:35:13 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	fillfirst(s1, join, i);
 	i = s1len;
 	while (s2[j] != '\0')
-	{
-		join[i] = s2[j];
-		j++;
-		i++;
-	}
+		join[i++] = s2[j++];
 	join[i] = '\0';
-    free(s1);
+	free(s1);
 	return (join);
 }
