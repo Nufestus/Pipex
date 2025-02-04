@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 22:22:11 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/03 15:14:44 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:28:38 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	joined = customstrlcat(joined, s1, s2);
 	joined[len1 + len2] = '\0';
-	// free(s1);
 	return (joined);
 }

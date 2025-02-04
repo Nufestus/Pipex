@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 20:09:10 by aammisse          #+#    #+#             */
-/*   Updated: 2025/01/27 01:38:01 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:34:11 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,30 @@ char	*getpath(char **av, int arg, t_cmd *process)
 		exit(errno);
 	}
 	return (process->path[0]);
+}
+
+char	*checkfile(t_cmd *process, char **av, int arg, char **env)
+{
+	int		i;
+	char	*str;
+	char	**path;
+
+	i = 0;
+	while (strncmp(env[i], "PATH", 4))
+		i++;
+	if (av[arg][0] == '.' && av[arg][1] == '/')
+		return (getpath(av, arg, process));
+	path = ft_split(env[i] + 5, ':');
+	process->path = ft_split(av[arg], ' ');
+	i = 0;
+	while (path[i])
+	{
+		str = ft_strjoin(path[i], "/");
+		str = ft_strjoin(str, process->path[0]);
+		if (!access(str, F_OK | X_OK))
+			return (ft_strdup(str));
+		i++;
+	}
+	freestr(path);
+	return (NULL);
 }

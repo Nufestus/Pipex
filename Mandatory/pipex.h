@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 13:58:09 by aammisse          #+#    #+#             */
-/*   Updated: 2025/01/27 01:30:49 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:34:32 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ size_t	ft_strlen(char *s);
 void	freestr(char **str);
 char	*ft_strdup(const char *s1);
 char	*getpath(char **av, int arg, t_cmd *process);
+char	*checkfile(t_cmd *process, char **av, int arg, char **env);
 
 #endif
