@@ -6,11 +6,32 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 21:41:51 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/04 16:19:46 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:20:51 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	len = 0;
+	while (src[len] != '\0')
+		len++;
+	if (dstsize == 0)
+		return (len);
+	while (src[i] != '\0' && i < dstsize - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (dstsize > 0)
+		dst[i] = '\0';
+	return (len);
+}
 
 static size_t	count_words(char *s, char c)
 {
