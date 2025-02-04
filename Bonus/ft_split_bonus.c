@@ -6,65 +6,76 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 21:41:51 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/03 14:59:20 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:19:46 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// char	*ft_strdup(char *s)
-// {
-//     char *dup = malloc(strlen(s) + 1);
-//     if (!dup)
-//         return (NULL);
-//     strcpy(dup, s);
-//     return (dup);
-// }
-
-// char	*ft_strjoin(char *s1, char *s2)
-// {
-//     char *joined;
-//     size_t len = strlen(s1) + strlen(s2) + 1;
-//     joined = malloc(len);
-//     if (!joined)
-//         return (NULL);
-//     strcpy(joined, s1);
-//     strcat(joined, s2);
-//     return (joined);
-// }
-
-void free_str_array(char **arr)
+static size_t	count_words(char *s, char c)
 {
-    int i = 0;
-    while (arr[i])
-        free(arr[i++]);
-    free(arr);
+	unsigned int	i;
+	size_t			word;
+
+	i = 0;
+	word = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			word++;
+		i++;
+	}
+	return (word);
 }
 
-// Basic ft_split (simplified version)
+static size_t	str_length(char *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
+}
+
+static char	**free_mem(char **s, int i)
+{
+	int	index;
+
+	index = 0;
+	while (index < i)
+	{
+		free(s[index]);
+		index++;
+	}
+	free(s);
+	return (NULL);
+}
+
 char	**ft_split(char *s, char c)
 {
-    int i = 0, j = 0, start, word_count = 1;
-    while (s[i]) // Count words
-        if (s[i++] == c)
-            word_count++;
-    char **result = malloc(sizeof(char *) * (word_count + 1));
-    if (!result)
-        return (NULL);
-    i = 0;
-    while (s[i]) // Split words
-    {
-        while (s[i] == c)
-            i++;
-        start = i;
-        while (s[i] && s[i] != c)
-            i++;
-        if (i > start)
-        {
-            result[j] = strndup(s + start, i - start);
-            j++;
-        }
-    }
-    result[j] = NULL;
-    return (result);
+	size_t	k;
+	size_t	index;
+	char	**p;
+
+	if (!s)
+		return (NULL);
+	k = count_words((char *)s, c);
+	index = 0;
+	p = (char **) malloc((sizeof(char *)) * (k + 1));
+	if (!p)
+		return (NULL);
+	while (index < k)
+	{
+		while (*s == c)
+			s++;
+		p[index] = (char *)malloc((sizeof(char) * (str_length(s, c) + 1)));
+		if (!p[index])
+			return (free_mem(p, index));
+		ft_strlcpy(p[index], s, str_length(s, c) + 1);
+		s = s + str_length(s, c);
+		index++;
+	}
+	p[index] = NULL;
+	return (p);
 }
