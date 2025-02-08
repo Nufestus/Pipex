@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:51:13 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/04 16:30:02 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:27:48 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int	execheredoc(t_process *process)
 	if (!limiter)
 		errorexit("Malloc failed");
 	here_doc(limiter, fd[1]);
-	waitpid(-1, 0, 0);
 	return (fd[0]);
 }

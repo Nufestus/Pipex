@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:36 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/04 16:34:22 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:52:59 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	setupchild2(char **av, char **env, t_cmd *process)
 	dup2(process->outfile, STDOUT_FILENO);
 	close(process->fd[0]);
 	close(process->fd[1]);
+	close(process->infile);
 	close(process->outfile);
 	process->cmd = checkfile(process, av, 3, env);
 	execve(process->cmd, process->path, env);
@@ -32,6 +33,7 @@ void	setupchild1(char **av, char **env, t_cmd *process)
 	close(process->fd[0]);
 	close(process->fd[1]);
 	close(process->infile);
+	close(process->outfile);
 	process->cmd = checkfile(process, av, 2, env);
 	execve(process->cmd, process->path, env);
 	perror("Path");

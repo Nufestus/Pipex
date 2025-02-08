@@ -6,13 +6,13 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 19:23:01 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/04 16:37:03 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/08 07:51:58 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	makechildren(t_process *process, char **env, int index)
+void	childlabor(t_process *process, char **env, int index)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -22,7 +22,7 @@ void	makechildren(t_process *process, char **env, int index)
 	getfds(process, fd[1]);
 	pid = fork();
 	if (!pid)
-	{
+	{	
 		close(fd[0]);
 		if (dup2(process->infile, 0) == -1)
 			errorexit("dup2 infile failed");
@@ -46,12 +46,12 @@ void	startpipex(t_process *process, char **env)
 	{
 		if (process->index == process->ac - 2)
 			process->outcheck = 1;
-		makechildren(process, env, process->index);
+		childlabor(process, env, process->index);
 		process->index++;
 	}
+	waitpid(-1, 0, 0);
 	close(process->infile);
 	close(process->originaloutfile);
-	waitpid(-1, 0, 0);
 }
 
 void	initdata(t_process *process, char **av, int ac)
