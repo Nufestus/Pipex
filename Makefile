@@ -6,7 +6,7 @@
 #    By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/27 01:39:09 by aammisse          #+#    #+#              #
-#    Updated: 2025/02/06 17:33:00 by aammisse         ###   ########.fr        #
+#    Updated: 2025/02/08 17:41:11 by aammisse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,10 @@ $(BOBJS): %.o: %.c Bonus/pipex_bonus.h Bonus/GNL/get_next_line_bonus.h
 
 clean:
 	rm -rf $(OBJS)
-	rm -rf $(OBJS)
+	rm -rf $(BOBJS)
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf $()
+	rm -rf $(BNAME)
 
 re: fclean all

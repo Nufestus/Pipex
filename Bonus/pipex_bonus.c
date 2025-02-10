@@ -6,7 +6,7 @@
 /*   By: aammisse <aammisse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 19:23:01 by aammisse          #+#    #+#             */
-/*   Updated: 2025/02/08 07:51:58 by aammisse         ###   ########.fr       */
+/*   Updated: 2025/02/08 22:40:36 by aammisse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	childlabor(t_process *process, char **env, int index)
 	if (pipe(fd) == -1)
 		errorexit("pipe failed");
 	getfds(process, fd[1]);
-	pid = fork();
+	if (pid == 0)
+		pid = fork();
 	if (!pid)
 	{	
 		close(fd[0]);
@@ -46,8 +47,7 @@ void	startpipex(t_process *process, char **env)
 	{
 		if (process->index == process->ac - 2)
 			process->outcheck = 1;
-		childlabor(process, env, process->index);
-		process->index++;
+		childlabor(process, env, process->index++);
 	}
 	waitpid(-1, 0, 0);
 	close(process->infile);
