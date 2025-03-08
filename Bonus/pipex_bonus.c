@@ -20,8 +20,7 @@ void	childlabor(t_process *process, char **env, int index)
 	if (pipe(fd) == -1)
 		errorexit("pipe failed");
 	getfds(process, fd[1]);
-	if (pid == 0)
-		pid = fork();
+	pid = fork();
 	if (!pid)
 	{	
 		close(fd[0]);
